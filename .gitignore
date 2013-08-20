@@ -1,0 +1,71 @@
+<html>
+<head>
+	<style type="text/css">
+		div{
+			position: absolute;
+			border: 1px solid #000;
+		}
+		div#popup{
+			width: 200px;
+			height: 200px;
+		}
+		div#titre{
+			width: 200px;
+			height: 20px;
+			text-align: center;
+			cursor: pointer;
+			background-color: #ccc;
+		}
+		div#contenu{
+			width: 200px;
+			height: 0px;
+			top: 20px;
+		}
+	</style>
+</head>
+<body>
+
+	<div id="popup" style="left:50px;top:50px;">
+		<div id="titre">Titre de la popup...</div>
+		<div id="contenu">Contenu...</div>
+	</div>
+
+	<script type="text/javascript">
+
+		//shortcut
+		function $(id){
+			return document.getElementById(id);
+		}
+
+		//mousedown event
+		$('titre').onmousedown = function(e){
+
+			//get popup x & y 
+			var x = parseInt($('popup').style.left);
+			var y = parseInt($('popup').style.top);
+
+			//get mouse x & y
+			posX = e.pageX - x;
+			posY = e.pageY - y;
+
+			window.onmousemove = function(e){
+
+				//get popup x & y
+				var x = parseInt($('popup').style.left);
+				var y = parseInt($('popup').style.top);
+
+				//move popup position
+				$('popup').style.left = (e.pageX - posX)+'px';
+				$('popup').style.top  = (e.pageY - posY)+'px';
+			}
+		}
+
+		//mouseup event
+		$('titre').onmouseup = function(e){
+		 	window.onmousemove = null;
+		}
+
+	</script>
+
+</body>
+</html>
